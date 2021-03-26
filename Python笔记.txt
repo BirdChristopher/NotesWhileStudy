@@ -1,0 +1,187 @@
+1.os.listdir(root)的作用：root是一个代表文件目录地址的字符串，该函数将会返回一个迭代器，可以获取root指向的
+目录下所有文件的名称。常于for in 结构混搭
+
+2.os.path.join(a,b,c,...)该函数将会返回一个文件地址，由a，b，c。。。拼接而成；
+
+3.sorted(iterable, cmp=None, key=None, reverse=False)
+sorted不会修改原来的可迭代对象
+此函数将会返回一个新的可迭代对象，key 和 reverse 比一个等价的 cmp 函数处理速度要快。
+这是因为对于每个列表元素，cmp 都会被调用多次，而 key 和 reverse 只被调用一次
+
+4.Python中is关键字将会比较两个元素的内存地址是否相等，而==则是比较二者的内容是否一致
+
+5.在同一个py文件中，除非明确操作分离，两个变量如果内容一样，内存就一样；
+
+6.Dataset的魔法方法__getitem__的意义：
+在用 for..in.. 迭代对象时，如果对象没有实现 __iter__ __next__ 迭代器协议，Python的解释器就会去
+寻找__getitem__ 来迭代对象，如果连__getitem__ 都没有定义，这解释器就会报对象不是迭代器的错误，
+所以__getitem__方法是用来实现迭代的，并且这个东西可以利用并行加速，性质比较优秀
+
+7.一般来说可迭代对象优先使用__iter__和__next__这两个魔法方法来实现（这两个称之为迭代器协议）
+如果定义了iter，则说明对象可迭代，如果有next，说明对象可以通过下标来索引
+
+8.Python的enumerate()函数用于一个可迭代对象，同时返回该对象的元素和下标
+
+9.Python中的type()函数用于返回指定对象的类名，注意不是返回DataType！！！
+
+10.Pytorch中，如果只用load来加载模型：
+句法应为：net = torch.load(path)
+若用load_state_dict则是执行net.load_state_dict(torch.load(path))
+注意，最好是保存module或者optimizer的.state_dict（）,而不是直接保存整个模型
+
+11.python的time库：
+time.time():返回当前时间戳
+time.ctime():返回一个人类可以读懂的表示时间的字符串
+time.strftime(tpl,ts)：按照tpl中的字符串模板自动填写当前的时间
+time.sleep(s):睡眠s秒
+time.perf_counter():可以连续调用两次求差值，查询过了多久时间，单位为秒
+
+12.Python的__init__文件作用：
+一：指示该文件夹是一个包，使得其他文件可以import该包
+二：可以在__init__文件中提前import好需要的库，这样调用这个包的时候会自动import
+
+13.从接口的角度来讲，对tensor的大部分操作同时支持torch.func和tensor.func两种表达方式
+
+14.Python的函数三种参数：arg，*arg，**kwarg，后两个不是常规的参数。
+*arg：将会把用户输入的参数打包成一个元组，供程序读取
+**kwarg：将会把用户的输入打包成一个字典
+注意，在函数定义的时候，这三者的定义顺序是确定的(arg,*arg,**kwarg),如果打乱将会报错
+
+15.nn.ModuleList()没有实现forward方法，必须手动定义forward方法
+nn.Sequential()实现了forward方法，并且输入可以是OrderedDict
+
+16.注意，Python中初始化集合需要用set()，参数可以是列表，元组，字典等等，集合中的元素无序且不重，
+集合不能用x = {}来初始化！
+
+17.Python字典的操作函数.get（key,default）,根据键key返回对应的值，若找不到则返回default
+
+18.Python在字符串前加u，是为了让这个字符串以unicode编码，防止因为字符串中有中文而乱码
+
+19.Python字符串格式化中，一个方法是“{1}，{2}”.format(,),format中按123顺序给出{}中的内容
+这个也可以用另一种方式，可在format中以赋值的方式指定标记位的内容，比如： （{1}，{2}.format（1 = "真滴流批" ,2 =  "没毛病" ））
+
+20.Python的getattr(obj,name)为在指定实例对象obj中查找name属性
+
+21.将tensor转化为ndarray，是用x.array()，而不是np.array(x)之类的其他命令
+
+22.在linux环境下没有IDLE，就可以用ipdb库来进行debug，如果windows下就用PyCharm就好了
+
+23.Python的字典类型有一个方法叫dict.item()，将会返回一个可遍历的元组数组
+
+24.用函数hasattr(obj,name)返回实例对象obj中是否有name属性
+
+25.字符串小技巧：str.startwith(str2)检查字符串str是否以str2开头
+
+26.以双下划线开头的类属性是私有属性，不能被直接访问，也不能被子类对象访问，只能通过类中
+定义的接口访问
+
+27.以单下划线开头的类属性是保护对象，只有类对象和子类对象能访问到这些数据
+
+28.在定义是用self.前缀来定义的属性是实例属性，每一个实例不同，而不带self.前缀的属性是类属性，是
+类属性
+
+29.Google的fire 命令行：python file <function> [args,] {--kwargs,}可以很方便的执行指定Python
+文件的函数，输出return的结果，不需要设计输入输出接口，很舒服
+
+30.Python的warning模块有一个函数warn函数，手动设置警报内容
+
+31.Python的@修饰符：https://www.runoob.com/w3cnote/python-func-decorators.html(有关如果被修饰函数有参数该如何处理见此处)
+例程：
+def funA(fn):
+   fn()
+   print("It's funA")
+ 
+@funA
+def funC():
+   print("It's funC")
+
+那么执行funC()的结果就是：It's funCIt's funA，因为程序等价于funC = funA(funC)，当然修饰符可以嵌套，修饰符只是一个简化表达
+那么此时funC就不再是一个函数，由于funA没有返回值，所以funC什么都不是，funC这个变量名在被修饰后变为什么取决于funA的返回值
+那么那两个字符串会在程序运行到@funA语句时打印出来(也就是funA（funC）是在运行@funA时运行)
+
+32.DataLoader的函数定义如下： DataLoader(dataset, batch_size=1, shuffle=False, sampler=None, num_workers=0, 
+collate_fn=default_collate, pin_memory=False, drop_last=False)
+
+dataset：加载的数据集(Dataset对象)
+batch_size：batch size
+shuffle:：是否将数据打乱
+sampler： 样本抽样，后续会详细介绍
+num_workers：使用多进程加载的进程数，0代表不使用多进程
+collate_fn： 如何将多个样本数据拼接成一个batch，一般使用默认的拼接方式即可
+pin_memory：是否将数据保存在pin memory区，pin memory中的数据转到GPU会快一些
+drop_last：dataset中的数据个数可能不是batch_size的整数倍，drop_last为True会将多出来不足一个batch的数据丢弃
+
+33.Python的del关键字可用于删除变量或者函数或者数组元素，如果用赋值语句将函数赋给一个新的变量，然后删除旧函数，新变量所指代的
+函数仍然能正常运行，相当于新变量申请了新内存
+
+34.Python中函数内部可以定义函数(内部的函数外界无法访问)；函数可以作为输出返回出来(很jb有用！可以根据实际情况挑选函数)
+函数还可以作为参数传进函数内部
+
+35.函数名后加(),则是执行这个函数，若不加则是将函数视为变量，可以传来传去
+
+36.Python定义类时，如果要在实例方法中修改类属性，需要用classname.classattr来引用，否则报错
+事实上还不知道自由方法和静态方法存在的意义在哪里。。。
+静态方法的修饰符是@staticmethod，不加self作为参数，可以理解为在类内部定义的一个函数，随便拿来用就行，
+类方法的修饰符是@classmethod，加self作为参数
+这两个方法都可以使用类属性，不可以使用实例属性和实例方法。
+这样的规定和面向对象编程的内存管理规则有关。
+
+37.sys.getrefcount()可以返回指向该目标的指针个数+1(因为函数本身也创立了一个指针指向目标)  、
+
+38.与zip相反，zip(*)可理解为解压，返回几个列表             
+
+39.Python的csv操作： 
+首先需要打开一个文件，与C语言不同，但与c++类似，
+用with open（"filename",option）as f：的方式打开，f指代已被打开的文件，
+然后创建csv.writer(fileobj)对象，也就是指定在f上写数据的对象，然后用这个写数据的对象的
+方法比如writerow(),writerows()
+而csv.reader则是用来读取的函数，不是一个对象，是一个元素为每一行的内容的列表
+还支持将字典自动填写成二维表的操作
+csv的特点：1、以行为单位读取；2，数据之间无空行，否则无法读取；3，读取出的数据一般为字符类型
+
+40.为什么PyTorch中的forward方法是通过<实例对象>(input)来调用的？因为该实例对象实现了__call__(input)方法，__call__方法
+可以接收上述函数的输入并调用自己，pytorch中正是通过__call__方法调用的forward方法
+
+41.model.named_parameters()返回一个由（名字，参数）元组构成的列表
+
+42.model.parameters()以列表形式返回所有的参数
+
+43.Pytorch的squeeze()函数将会去掉数据中所有维数为1的维度，对维数不为一的维度不影响
+而unsqueeze()则是在指定位置上加上一个维数为1的维度
+
+44.Python的torchnet库中的ConfusionMeter对象存储的混淆矩阵形如：
+ \ |  数据被程序分到哪一类
+—|—————————
+数|
+据|
+事|
+实|
+上|
+应|
+该|
+被|
+分|
+到|
+哪|
+一|
+类|
+
+45.optimizer.params_group:返回一个列表，每一个列表元素是一个字典，代表一份参数配置，由于我们可以在定义优化器
+时定义不同的网络层拥有不同的训练参数，所以列表的长度可以大于1
+
+50.Python的try—except语句：如果你觉得一部分代码可能出错，可以用这个句式在出错时跳过它
+
+51.Python断言：assert 后跟一个布尔表达式
+assert <boolean>:
+	func....
+将会在布尔表达式为false时直接返回错误，而不是等程序崩溃后再返回错误，方便定位bug
+
+52.np.ravel()将一个多维的ndarray展成一维
+
+53.np.linang.norm求范数
+
+54.python字符串前加b意思是bytes,那么想要正确访问和操作这个字符串就必须一直用b'str'来书写，b不能丢
+
+55.Python将数字转换为字符串的方法：str = “%d”%num'
+
+56.Python面向对象，加__前缀的是private类型的，加_前缀的是protected类型的。

@@ -1,0 +1,22 @@
+1.文件路径怎么写：
+（1）./ 当前目录
+../ 当前目录的父级目录
+/ 当前目录的根目录
+2.Ipython
+3.PIL库
+4.Collections 模块：提供一些高级的数据结构
+5.FFT算法。。。自己再写一遍吧。。。
+6.python的find方法：返回是否可以再字符串中找到指定子串
+str.find(str,beg,end)
+7.getattr()函数和setattr()函数
+8.python在定义函数的时候，默认值为None的参数必须位置在最后面
+9.ipython魔术命令
+10.os.path.join()是否仅仅是实现了生成一个指定的字符串
+11.Python的多行注释是''' ........ '''
+12.Python利用for循环生成列表
+	比如list = [x*x for x in range(10)]
+13.sorted函数：对可迭代对象排序
+    sort是列表对象的方法，返回的是排序好的list
+    sorted则返回一个新的list
+
+14.最长上升子序列的算法复杂度最优能达到O（nlogn）

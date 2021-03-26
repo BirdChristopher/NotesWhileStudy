@@ -1,0 +1,8 @@
+1.手动搭建网络训练Cifar10，MNIST,ImageNet等数据集。
+2.复现论文：inceptionV4，Resnet，VGG，DenseNet
+3.RNN，LSTM
+4.Kaggle打比赛
+打两三次之后学习：
+5.统计学习方法
+6.HandWriting recognition
+7.Style Transfer
