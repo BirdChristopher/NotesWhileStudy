@@ -1,0 +1,7 @@
+1.对于一个ndarray，可以用tolist来将其变成一个列表，但请注意，其只是将其最外层的组织形式
+变成了列表，也就是说变成一个由ndarray组成的列表。
+
+2.np.array(size,dtype)这个方法只能用于将别的组合数据类型转化为ndarray，并不能建立一个全新的ndarray，注意！
+
+3.numpy.array(Image)可以将图片转换为（width x height x 3）的ndarray，Image.fromarray(ndarray)可从这样形式的
+ndarray还原一个Image对象。

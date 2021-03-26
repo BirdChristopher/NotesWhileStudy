@@ -185,3 +185,9 @@ assert <boolean>:
 55.Python将数字转换为字符串的方法：str = “%d”%num'
 
 56.Python面向对象，加__前缀的是private类型的，加_前缀的是protected类型的。
+
+57.如果在Python类中调用此类中的任何方法或者实例属性（类属性不算），都必须要加self，解释器才能找得到。
+
+58.tqdm库：必须还得from tqdm import tqdm才能调用tqdm函数
+
+59.torchnet的meter库，加入值是add()，显示结果是value(),返回一个元组
