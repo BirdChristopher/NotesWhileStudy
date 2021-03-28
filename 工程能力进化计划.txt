@@ -1,4 +1,5 @@
 1.手动搭建网络训练Cifar10，MNIST,ImageNet等数据集。
+2.尝试使用torch中已有的模型
 2.复现论文：inceptionV4，Resnet，VGG，DenseNet
 3.RNN，LSTM
 4.Kaggle打比赛
