@@ -216,3 +216,42 @@ Python的第三方库的搜索顺序：
 67.Python的eval函数的输入必须是字符串
 
 68.Pytorch的模型都有内部比较合理的初始化策略，一般不用我们考虑，写出来就好了
+
+69.如果所有的训练图片都按类分文件夹放置好了，那么就可以考虑使用ImageFolder方法来处理dataset
+
+70.numpy中转换数据类型的函数是.astype("<datatype>")，而Pytorch中是tensor.type("<datatype>")
+而tensor.type_as(another_tensor)的作用是生成一个新的尺寸相同当时数据类型和another_tensor一样的tensor
+
+pytorch中t.new_tensor()是一个有用的函数，创建新的内存分区，生成全新tensor。
+
+Pytorch中调用.shape()查看tensor的尺寸时，生成的是一个独特的数据torch.Size([......])，所以想要判断tensor尺寸是否合要求
+不能将shape和一个list比较。可以用torch.Size()来生成一个对应的数据。Tensor.Size()方法返回的值和Tensor.shape一样
+
+71.Python中的filter(func,list)不是一个函数哦，是一个filter对象，作用是根据func中的返回值(返回为True的留下)筛选list中的数据，
+需要用list()来将其变为一个list对象，不能直接使用
+
+72.BatchNorm2d层不能在线性层使用哦，因为BatchNorm2d只接受由三维tensor组成的4维输入，可以用BatchNorm1d。
+
+73.tensor.to()不能直接写tensor.to("cuda"),而应该tensor.to(torch.device("cuda"))，且需要使用赋值语句，否则原tensor
+仍然在cpu上
+
+一般训练过程中只需要将model和data和label放到gpu上即可
+
+74.小技巧：如果我们需要调用另一个module中定义的类（假如是config.py中的config类），我们完全可以在config.py中
+直接写opt = config（），然后在别的文件中使用from config.py import opt，这样就可以完美的回避可能遭遇的命名空间问题。
+
+75.接上条：Python的奇妙技巧：
+在Python中定义一个类时，可以在先类中引用一个类指针，在类定义完毕后再初始化这个指针。
+举例如下：
+class config:
+    def parseConfig(self, **kwargs):
+        if t.cuda.is_available():
+            opt.device = t.device('cuda') ------？
+
+opt = config()------！
+这样不会编译错误！！
+非常的神奇！暂时不知道啥原理，据检测java不支持这样的操作。c++懒得试了
+
+76.Python一个文件中的任何函数，变量（即使x = 1）,类都可以被import到别的文件里去，和java的引用机制稍有区别。
+
+77.记得把use_incoming_socket给关了。。。开着的话曲线会抽搐
