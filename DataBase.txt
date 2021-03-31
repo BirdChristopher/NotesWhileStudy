@@ -1,0 +1,12 @@
+1.update Person set age = age+1 where age = age
+可用于指定值更新，这里的age = age+1意味着sql语言中列名也可以代指列中的数据。
+
+2.unique key和primary key的区别：可以有多个unique key，但只能有一个primary key，即我们可以在
+unique key中挑一个作为primary key，primary key必然是unique的
+
+3。%替代一个或多个字符，_只能替代一个字符。
+[charlist]为字符列中的任意单一字符。
+
+4.sql语言的检索方式：like--可以与通配符搭配使用达到筛选指定模式字符串的效果
+
+5.sqlserver中的函数getdate()，返回当前时间，是每个表的隐藏但必然会存在的列，可以用select查询出来，用format关键字按指定格式显示
