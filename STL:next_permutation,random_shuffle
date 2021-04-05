@@ -1,0 +1,20 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<set>
+#include<map>
+#include<queue>
+#include<utility> 
+//next_permutation,random_shuffle函数 
+using namespace std;
+
+
+int main(){
+	int a[5]={1,2,3,4,5};
+	random_shuffle(a,a+5);//只需要起始迭代器和终止迭代器即可使用 
+	next_permutation(a,a+5);//依照字典序返回字典序更大的下一种排列，默认为升序 
+	for(int i = 0;i<5;i++)
+		cout<<a[i]<<endl;
+	return 0;
+}
