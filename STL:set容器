@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+
+//set也可以用于结构体，但是由于set一般来说是用默认的比较函数
+//所以对结构体用set时需要重载比较方法，即:  operator<
+struct A{
+string str;
+int score;
+};
+ 
+bool operator<(const A& lhs, const A& rhs) {
+    return lhs.score<rhs.score;
+}
+ 
+void test(){
+set<A>s;
+A a,b,c;
+a.str="shanying";a.score=100;
+b.str="shanying";b.score=0;
+c.str="baitoudiao";c.score=50;
+ 
+A cpy(a);
+cout<<"orign:"<<a.str<<','<<a.score<<endl;
+cout<<"copy:"<<cpy.str<<','<<cpy.score<<endl;
+ 
+A assigned;
+assigned = a;
+cout<<"assigned:"<<assigned.str<<','<<assigned.score<<endl;
+ 
+cout<<"a<b?"<<(a<b?"true":"false")<<endl;
+ 
+s.insert(a);
+s.insert(b);
+s.insert(c);
+ 
+cout<<"size:"<<s.size()<<endl;
+}
+ 
+int main() {
+    test();
+ 
+    return 0;
+}
