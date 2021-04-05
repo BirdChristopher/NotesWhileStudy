@@ -1,0 +1,21 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+//unique函数例程
+//作用：取出容器内相邻的并且重复的元素，只保留一个
+//本质上是将这些重复的元素移到最后面去 
+using namespace std;
+
+
+int main(){
+	int x[10] = {1,3,3,5,2,7,5,1,2,3};
+	int *y = unique(x,x+9);
+	//传入容器的头和尾的引用即可，返回的是去重后容器的结束迭代器？或者尾端指针 
+	int i;
+	for(i=0;i<9;i++)
+	{
+		cout<<x[i]<<endl;
+		}	
+	return 0;
+}
