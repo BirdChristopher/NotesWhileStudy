@@ -1,0 +1,25 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+//nth_element函数例程 :只适用于vector，deque，array三款容器 
+using namespace std;
+
+namespace myCompare{//这个自定义的比较函数可以自定义，注意不要在std空间下命名为greater 
+	bool greater(int x,int y){//注意这个写法和qsort不一样，形参就必须确定数据类型 
+		return x>y;
+	}
+}
+
+int main(){
+	int x[10] = {1,3,5,2,7,4,6,0,9,8};
+	nth_element(x,x+5,x+10,myCompare::greater);
+	//格式为nth_element(x,x+<n>,尾端指针，自定义排序函数)，自定义函数可以不需要
+	//但要注意，这个函数会将数组重新排序 
+	int i;
+	for(i=0;i<10;i++)
+	{
+		cout<<x[i]<<endl;
+		}	
+	return 0;
+}
