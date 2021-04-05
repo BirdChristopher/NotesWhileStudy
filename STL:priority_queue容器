@@ -1,0 +1,21 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+#include<set>
+#include<map>
+#include<queue>
+//priority_queue容器例程
+using namespace std;
+
+
+int main(){
+	priority_queue<int,vector<int>,greater<int> >x;
+	//prirority_queue的完整初始化格式。默认用容器vector，比较方法less（也就是默认大顶堆） 
+	x.push(3);//进堆 
+	x.push(2);
+	x.push(1);
+	cout<<x.top()<<endl;//取顶上的元素 
+	x.pop();//去除头部元素 
+	return 0;
+}
