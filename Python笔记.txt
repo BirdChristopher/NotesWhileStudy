@@ -259,3 +259,57 @@ opt = config()------！
 78.fire用法：直接写python main.py func [**kwargs]即可，与linux命令行格式一样
 
 79.加号+只能用于两个字符串间的连接，不能用于字符串和其他变量的连接，虽然一般也不是啥严重的错误就是了
+
+80.Python的warnings库可以在指定条件下跳出自定义警告信息，使用也非常简单，只需要在指定的时候执行
+warnings.warn(<str>)即可。
+
+81.GOOGLE colab上切换工作路径的指令是%cd，而不是！cd，这是这个命令的特殊之处
+
+82.Python fire 库的使用中，如果要传参数，建议以下格式：
+python  main.py  <func name>  -<argu1 name>=argu1,<argu2 name>=argu2(参数个数可变)
+要注意的一点是，根本不需要担心传入的参数还需要从字符串转换为实际可用的值。fire库会自动帮我们完成。注意输入参数的时候需要加
+“。。。。。。”来告诉fire这个参数规定为字符串。
+
+83.Python用open来打开文件的时候，要注意newline参数，如果不设置为“”直接用writerow会导致行与行之间有空行
+
+84.在list之前加*，用于将list拆开为一个一个分开的变量，可以用于传给**kwargs的参数
+
+85.orderdict的定义格式为OrderedDict([(a,1),(b,2),(c,3)])
+
+86.调用model_state_dict()函数返回的只是内部参数的一个副本，直接修改是无效的。
+
+87.update建议不要用于字典的单个成员的赋值，效率比较低
+
+88.Pytorch接口小总结：
+设model为一个继承自nn.Module的网络。
+model.modules()：返回一个生成器，生成器生成model中的所有的子module，会将子module中的所有layer都给出来，
+是一个迭代地拆分的过程
+model.children(): 返回一个生成器，生成器生成model中的所有的子module，但不会迭代拆开封装了许多layer的子module
+model.parameter():返回一个生成器，生成器的每一个元素是torch.nn.parameter.Parameter类的实例，需要用
+.data才能以tensor形式访问参数，这时也就可以用等号赋值的方式修改参数的值了。
+model.state_dict():返回一个OrderedDict，返回model中所有参数的一个副本
+nn.Module.weight:返回一个装有参数的容器，必须用nn.Module.weight.data才能将其转换为tensor。注意对封装好的
+网络不能调用weight。
+
+如果要freeze网络中的参数，需要对parameter操作来freeze，而不是freeze layers，只有freeze每一层的参数才能奏效
+
+89.z = nn.Sequential()中的layer可以通过加索引号z[i]来单独获取其中的层，从而达到精确修改网络的目的
+
+90.tensor.copy(src):将src指向的tensor复制一份过来覆盖原tensor，要求两者的shape一致
+
+91.python的set()函数将一个对象转换为集合对象，具有去重的功能，比如说set(String)就可以提取字符串中所有字符并去重。
+
+92.用[for  in]结构可以构建列表，类似用{for in}可以创建字典。
+
+93.numpy的随机矩阵：np.random.randn(),torch则不需要random。
+
+95.ndarray是不能用作字典的键的：not hashable
+
+96.python使用全局变量，需要在函数外部初始化，在函数内部再用global关键字声明一下即可
+
+97.ndarray.ravel()将多维的ndarray转换为一维张量
+
+98.字典的内部的架构是hashmap，在增删改这方面的性能远远优于列表，所以如果只需要存储索引关系，建议
+用字典，将字典的键设置为下标，达到与列表同等的效果
+
+99.用join连接字符串的时候，join(不是列表，而是**kwargs)

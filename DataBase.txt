@@ -7,6 +7,21 @@ unique key中挑一个作为primary key，primary key必然是unique的
 3。%替代一个或多个字符，_只能替代一个字符。
 [charlist]为字符列中的任意单一字符。
 
-4.sql语言的检索方式：like--可以与通配符搭配使用达到筛选指定模式字符串的效果
+4.sql语言的检索方式：like--可以与通配符搭配使用达到筛选指定模式字符串的效果，不要用等号！
 
 5.sqlserver中的函数getdate()，返回当前时间，是每个表的隐藏但必然会存在的列，可以用select查询出来，用format关键字按指定格式显示
+
+6.如果用，代替inner join，那么条件就写在where，如果直接写inner join 就用on，inner join最多连接两张表
+
+7.group by 关键字就是与集函数配合使用的，本来就是先分组再用函数。没有集函数也就没有必要存在group by
+
+8.union用于将两个查询结果合并，并且自动去重
+union all 则不会去重
+
+9.exists关键字不要忘了结尾的s
+
+10.count(distinct ..)可以去重计数
+
+11.with check option 可以保证对视图进行增删改时不破坏视图定义时的约束条件
+
+12.创建视图的过程可以看做sql语言中的内联语句，完整的保存了定义语句，使用时用定义语句替换view

@@ -1,9 +1,16 @@
-1.手动搭建网络训练Cifar10，MNIST,ImageNet等数据集。
-2.尝试使用torch中已有的模型
-2.复现论文：inceptionV4，Resnet，VGG，DenseNet
-3.RNN，LSTM
-4.Kaggle打比赛
+手动搭建网络训练Cifar10，MNIST,ImageNet等数据集。Done
+尝试使用torch中已有的模型.Done
+复现论文：inceptionV4，Resnet，VGG，DenseNet 
+
+搭建热门CV问题的工程：（好难。。。）
+Semantic segmentation
+Classification & localization
+Object Detection：faster R-CNN ， YOLO,SSD
+Instance segmentation： mask R-CNN 
+
+RNN，LSTM：。。。啥时候有时间做到这里呢。。。
+Kaggle打比赛
 打两三次之后学习：
-5.统计学习方法
-6.HandWriting recognition
-7.Style Transfer
+统计学习方法
+HandWriting recognition
+Style Transfer
