@@ -12,3 +12,109 @@ bean的第二种注入属性方式：必须有get方法拿到对象。
 4.Spring注入int属性也是用字符串，会自动解析字符串为int数据
 
 5.集合框架注入成员时，只能用引用来注入外部bean，不能用内部bean？？？？？？？？ 
+
+6.Spring支持将xml配置文件中相同的部分提出来打包。具体操作比较复杂。
+
+7.Spring配置文件生成的对象默认是单实例的，但是可以设为多实例
+singleton：加载配置文件时创建单例
+prototype：getBean获取时才创建非单例对象
+
+8.bean的生命周期：
+1.调用无参构造
+2.属性注入
+3.调用自定义的初始化方法
+4.可以使用了
+5.销毁时，调用自动义的销毁方法（析构方法），但是需要手动销毁配置文件（不是删除）
+
+9.autowire
+1.根据属性名称自动注入：需要被注入的bean id的值与成员属性的名称相同；
+2.根据type自动注入：注意相同 类 的bean不能定义多个。
+
+10.注解@component意思是将一个类交给Spring容器来管理
+
+11.可通过configurativeproperties(prefix="xxx")来获取自定义配置,规则是类属性的名字要和配置文件中属性的名称相合
+？？？？？？？？？？？
+
+12.可通过在pom文件中用properties标签加属性自定义依赖的版本，引入非版本仲裁的jar要写版本号
+
+13.主程序所在的包及其子包中的所有组件都会被扫描。当然可以用@SpringApplication(baseScanPackage="")来指定扫描
+什么包，这是因为该注解集成了@ConfigurationScan注解。
+
+14.@Configuration(ProxyBeanMethods=true(full模式)/false（lite模式）)注解可以注解一个类来标记这个类是配置类，代替传统的bean.xml，配置类中可以使用@Bean
+注解来注册一个类到IOC容器中。方法名就是组件的id，返回类型就是组件类型。
+注册类本身也是组件。
+full模式下，bean中的组件都是单例的，lite则不是单例。full和lite用于解决组件依赖。
+
+full模式：检查。
+lite模式：跳过检查组件中方法返回的内容（类对象）在IOC中是否有注册
+
+为什么有时候要开full，有时候要开lite呢？因为Springboot在开始run的时候会加载大量的自动配置类，来提供网络，缓存等服务，这些
+服务的实现类应该是单例的（有一些重要的依赖关系），然后一些开发者自定义的很重要的类也应该是单例的，不能破坏组件间的依赖关系。
+
+springMVC所有的功能组件都需要手动配置，非常麻烦，springboot自动配置可以一键加载很舒服。并且springboot也支持定制功能组件，
+只要你这个定制的功能组件的类名和原来的组件类名相同。
+
+15.不同注解的作用
+@Component：类组件（传统的将类注册到IOC容器中的方式）
+@Controller：控制组件
+@Service：业务逻辑组件
+@Repository：数据库组件。
+@Entity：数据库实体组件
+以上注解只是名称不同，其实都意味着指示这些类要自动装配。实际使用时混用都没有关系。
+
+用这种注解来注册类的方式，如果在基本Spring环境下，需要在bean.xml中设置一个标签，指定扫描注解的包。
+(1.引入依赖   2.开启组件扫描   3.添加注解。)
+
+但是在SpringBoot中不需要。
+
+当然SpringBoot会优先装配带有@Configuration的主配置类。主配置类完全代替XML配置文件。
+
+16.Springboot底层注解：
+@Configuration：指定一个类为配置类。
+@Import({....})中指定要导入的类的对象（就是Class对象！），IOC容器自动会生成对象
+@Conditional。。。一类直接：可以注解于配置类或者内部方法，根据条件来进行装配。甚至可以根据properties中是否有指定字段来装配
+@ImportResource(classpath:bean.xml)用于导入外部xml配置文件，在已有xml配置又不想从新写注解配置时可用。
+@ConfigurationProperties(prefix="")用于使用properties(yaml)的配置来注入属性。
+
+17.Springboot中好像不怎么用静态方法？？？？？
+
+18.Dao和Service层的都是由一个接口来统一总结的。这也是SpringBoot规范的地方。
+
+19.基于注解方式实现属性注入：
+（1）@AutoWired：根据属性类型自动装配  往往注入接口。
+（2）@Qualifier：根据属性名自动装配    ：     
+	必须和@Autowired一起使用，根据名称（value=“。。。”）找到具体用哪一个接口的实现。
+	名称默认是类名的首字母小写形式。可以通过注解修改（比如 @Component（value=“。。。。”））
+
+（3）@Resource：属性名和属性类型都适配 （javax包中的，前两个都是Spring包中的）
+（4）@value：注入普通类型属性 
+	直接在类的成员属性头顶规定这个属性被注入什么值。
+
+20.AOP的jdk动态代理。。。
+
+21.AspectJ是独立于Spring的，可以单独用。
+通知类型和对应注解：
+@Before
+@Around：注意，around的环绕之前会比before执行还要早。
+@AfterThrowing
+@After
+@AfterReturning：有异常就不执行
+
+相同切入点抽取@Pointcut(value="<切入点表达式>")
+
+@EnableAspectJAutoProxy(proxyTargetClass = true)//用注解开启Aspect生成代理对象
+@ComponentScan(basePackages = {"com.orzjiangxiaoyu.aop"})//注解开启组件扫面，指定扫描包
+
+22.springboot中的classpath默认为resources目录。classpath的意思似乎是编译后.class文件存放的位置。
+
+23.一系列自动装配的注解生效的前提是类已经导入容器
+
+24.@Bean注解的方法若有类对象的引用，则这个参数会从容器中寻找。
+
+25.开发者所能操作的application.properties文件中配置的属性可以覆盖自动配置组件的properties的属性。类似于总代理的角色。
+这是因为自动配置组件的properties也是根据prefix从application.properties拿配置属性的，查底层代码可以查到。
+
+26.lombok：@Data加上之后自动生成setter getter 方法，加了@ToString之后甚至自动生成toString方法。
+@NoArgConstructor @AllArgsConstructor
+
+27.yaml格式的文件可以表示列表（-xxx -xxxx），map（json格式），'xxx' ''xxxx''是有区别的。
