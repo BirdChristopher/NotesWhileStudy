@@ -236,3 +236,6 @@ Foo的对象 是 Foo f1=new Foo();
 
 65.maven是根据启动项目时的设置动态给出依赖的，其拿到依赖的源在国外。并且一个项目的依赖往往很庞大。可以修改maven的
 源为alibaba镜像。
+
+66.java中如果一个方法被throws标记，那么调用这个方法的caller必须用try--catch结构。如果callee没有被throws标记，那么就可以
+在方法内部直接处理异常。

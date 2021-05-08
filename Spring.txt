@@ -118,3 +118,26 @@ springMVC所有的功能组件都需要手动配置，非常麻烦，springboot�
 @NoArgConstructor @AllArgsConstructor
 
 27.yaml格式的文件可以表示列表（-xxx -xxxx），map（json格式），'xxx' ''xxxx''是有区别的。
+
+28.只要资源存放在类路径下的静态文件夹里，就可以当做静态资源被localhost：8080//<资源名>直接访问
+
+29.静态映射/**
+/* 是拦截所有的文件夹，不包含子文件夹
+/** 是拦截所有的文件夹及里面的子文件夹
+请求进来，先由controller处理找不到再由静态资源处理器处理，再找不到就404
+
+30。@ResponseBody注解的作用是将controller的方法返回的对象 通过适当的转换器 转换为指定的格式之后，
+写入到response对象的body区（响应体中），通常用来返回JSON数据或者是XML。否则controller默认就是转发request
+数据，这里还要着重强调一下，要通过@ResponseBody 注解 将返回的json字符串放入响应体中，
+然后在前台js才能拿到json字符串进行解析，如果不加，响应体中就没有放入json字符串，前台自然是拿不到数据的，希望大家别理解错。
+
+
+31.springboot请求的解析方式
+@PathVariable
+@RequestBody
+@RequestParam
+@RequestAttribute
+@RequestHeader
+@CookieValue
+
+32.似乎不支持将一个对象加入@ResponseBody返回的json，但是用alibaba的fastjson可以转化一下。
