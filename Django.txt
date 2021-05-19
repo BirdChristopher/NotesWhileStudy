@@ -18,3 +18,31 @@ Django数据库报错
 
 5.执行完makemigrations只是生成了对应的sql语句，还并没真正将改动迁移到数据库中。
 需要执行migrate才能将改动迁移到数据库，完成建表、修改字段等操作。
+
+6.python manage.py sqlmigrate 可以查看迁移的sql语句，或者自定义批处理语句
+
+7.主键IDs会被自动创建
+
+8.HttpRequest对象会由Django自动创建，但是HttpResponse对象需要我们在每个视图中实例化，填充，返回。
+
+9.HttpResponse的用法：
+	1.传入字符串
+	2.传入迭代器（会立即消耗迭代器，将内容存储为一个字符串，然后丢弃迭代器）
+	3.设置headers
+	4.etc
+
+10.HttpResponse携带的能返回的信息本质上就是一段文本，这个文本再被浏览器解析。
+
+11.Django不通过SQL语句来操作数据库。Django假定数据库中的内容都是对象（完全public的），可以在数据库中取出来（filter），
+放回去（save），赋值（=赋值），建立新的字段（create），一切都用类方法封装完毕了
+
+12.Django默认每个主表对象都有一个属性是外键的信息（_set），可以通过这个来查询所有与主表有关的子表的信息
+
+13.href只能发出GET请求，action可以发出POST请求。
+
+14.网络中的csrf：
+CSRF防御需要我们session中的token,request的cookie中的token和请求url的参数中的csrf验证码一致
+当然请求url中的参数token就是从cookie中拿到的
+
+
+	
